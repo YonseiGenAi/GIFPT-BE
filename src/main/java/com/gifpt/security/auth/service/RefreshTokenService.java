@@ -27,7 +27,9 @@ public class RefreshTokenService {
       StringBuilder sb = new StringBuilder();
       for (byte b : hash) sb.append(String.format("%02x", b));
       return sb.toString();
-    } catch (Exception e) { throw new RuntimeException(e); }
+    } catch (java.security.NoSuchAlgorithmException e) {
+      throw new IllegalStateException("SHA-256 algorithm not available for hashing in sha256()", e);
+    }
   }
 
   /** 원본 문자열 토큰을 발급하고, 해시만 DB에 저장 */
