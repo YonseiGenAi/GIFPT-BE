@@ -24,6 +24,7 @@ public class FileUploadController {
   private final UserRepository userRepository;
   private final Path uploadDir = Paths.get("uploads");
 
+  @SuppressWarnings("null")
   @PostMapping("/upload")
   public ResponseEntity<?> uploadFile(
       @RequestParam("file") MultipartFile file,
@@ -43,7 +44,7 @@ public class FileUploadController {
     Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
     // 3) DB 저장 (영속 User를 반드시 넣어야 함)
-    UploadFile uploaded = UploadFile.builder()
+    final UploadFile uploaded = UploadFile.builder()
         .user(user)
         .fileName(fileName)
         .s3Url(filePath.toString()) // 로컬 경로
