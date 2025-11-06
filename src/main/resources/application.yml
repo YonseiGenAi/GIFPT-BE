@@ -16,6 +16,11 @@ spring:
       hibernate:
         format_sql: true
 
+gifpt:
+  jwt:
+    secret: "dev_dev_dev_dev_dev_dev_dev_dev_32bytes_min"
+    expires-in-ms: 3600000  #1시간
+
 server:
   port: 8080
 
