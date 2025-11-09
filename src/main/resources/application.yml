@@ -1,25 +1,9 @@
 spring:
   application:
     name: gifpt
+  # 로컬 .env 쓰고 싶으면 옵션으로만 불러와라이
   config:
-    import: "classpath:application-dotenv.properties"
-  datasource:
-    url: jdbc:mysql://localhost:3306/gifpt
-    username: root
-    password: ${DB_PASSWORD:}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-gifpt:
-  jwt:
-    secret: "dev_dev_dev_dev_dev_dev_dev_dev_32bytes_min"
-    expires-in-ms: 3600000  #1시간
+    import: "optional:file:.env[.properties]"
 
 server:
   port: 8080
@@ -29,3 +13,8 @@ springdoc:
     path: /swagger-ui
   api-docs:
     path: /v3/api-docs
+
+gifpt:
+  jwt:
+    expires-in-ms: 3600000  # 1시간
+  
